@@ -173,9 +173,6 @@ enum TINYGLTF_TARGET_ELEMENT_ARRAY_BUFFER = (34963);
 enum TINYGLTF_SHADER_TYPE_VERTEX_SHADER = (35633);
 enum TINYGLTF_SHADER_TYPE_FRAGMENT_SHADER = (35632);
 
-// enum TINYGLTF_DOUBLE_EPS = (1.e-12);
-// enum string TINYGLTF_DOUBLE_EQUAL(string a, string b) = ` (std::fabs((b) - (a)) < TINYGLTF_DOUBLE_EPS)`;
-
 
 enum Type {
     NULL_TYPE,
@@ -241,10 +238,6 @@ pragma(inline, true) private int getNumComponentsInType(uint ty) {
         return -1;
     }
 }
-
-// TODO(syoyo): Move these functions to TinyGLTF class
-// bool IsDataURI(const(std) in_);
-// bool DecodeDataURI(ubyte* out_, std mime_type, const(std) in_, size_t reqBytes, bool checkSize);
 
 // Simple class to represent JSON object
 //* Translation Note: This whole thing is duck typed
