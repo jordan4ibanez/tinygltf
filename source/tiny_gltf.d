@@ -1743,10 +1743,7 @@ unittest {
     Model successModel = new Model("models/cube_embedded/cube.gltf");
     assert(successModel !is null);
     assert(successModel.loadFile() == true);
-
-  
-    // These weren't pure json so they didn't work :(
-    /*
+    
     writeln("\nSUCCESS PASS\n");
 
     // Now test a corrupted model.
@@ -1754,24 +1751,5 @@ unittest {
     assert(corruptedModel.loadFile() == false);
 
     writeln("\nCORRUPTED PASS\n");
-
-    /*
-    Testing all the BoundsChecking debug gltf models.
-    
-    These all load, but they have wrong data.
-    * /
-
-    Model integerFailure = new Model("models/BoundsChecking/integer-out-of-bounds.gltf");
-    assert(integerFailure.loadFile() == true);
-
-    Model bufferFailure = new Model("models/BoundsChecking/invalid-buffer-index.gltf");
-    assert(bufferFailure.loadFile() == true);
-
-    Model bufferViewFailure = new Model("models/BoundsChecking/invalid-buffer-view-index.gltf");
-    assert(bufferViewFailure.loadFile() == true);
-
-    Model primitiveFailure = new Model("models/BoundsChecking/invalid-primitive-indices.gltf");
-    assert(primitiveFailure.loadFile() == true);
-    */
     
 }
