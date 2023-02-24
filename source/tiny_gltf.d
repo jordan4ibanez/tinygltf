@@ -1,3 +1,4 @@
+//** TinyGLTF is a library for loading JSON serialized (embedded) GLTF models.
 module tinygltf;
 
 import std.stdio;
