@@ -869,16 +869,10 @@ class Model {
     Animation[] animations;
     Buffer[] buffers;
     BufferView[] bufferViews;
-    Material[] materials;
     Mesh[] meshes;
     Node[] nodes;
-    Texture[] textures;
-    Image[] images;
     Skin[] skins;
     Sampler[] samplers;
-    Camera[] cameras;
-    Scene[] scenes;
-    Light[] lights;
 
     int defaultScene = -1;
     string extensionsUsed;
