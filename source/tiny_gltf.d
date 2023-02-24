@@ -556,46 +556,6 @@ class Sampler {
     }
 }
 
-class TextureInfo {
-    int index = -1;     // required.
-    int texCoord = 0;   // The set index of texture's TEXCOORD attribute used for
-                        // texture coordinate mapping.
-
-    this(int index = -1, int texCoord = 0) {
-        this.index = index;
-        this.texCoord = texCoord;
-    }
-}
-
-class NormalTextureInfo {
-    int index = -1;     // required
-    int texCoord = 0;   // The set index of texture's TEXCOORD attribute used for
-                        // texture coordinate mapping.
-    double scale = 1.0; // scaledNormal = normalize((<sampled normal texture value>
-                        // * 2.0 - 1.0) * vec3(<normal scale>, <normal scale>, 1.0))
-
-    this(int index = -1, int texCoord = 0, double scale = 1.0) {
-        this.index = index;
-        this.texCoord = texCoord;
-        this.scale = scale;
-
-    }
-}
-
-class OcclusionTextureInfo {
-    int index = -1;        // required
-    int texCoord = 0;      // The set index of texture's TEXCOORD attribute used for
-                           // texture coordinate mapping.
-    double strength = 1.0; // occludedColor = lerp(color, color * <sampled occlusion
-                           // texture value>, <occlusion strength>)
-
-    this(int index = -1, int texCoord = 0, double strength = 1.0){
-        this.index = index;
-        this.texCoord = texCoord;
-        this.strength = strength;
-    }
-}
-
 
 class BufferView {
     string name;
