@@ -443,11 +443,6 @@ class Parameter {
     }
 }
 
-/// Simple alias for readability
-alias ParameterMap = Parameter[string];
-/// Simple alias for readability
-alias ExtensionMap = Value[string];
-
 /**
     Holds animation channels. Animations channels are the root of the animation in the model.
     An animation channel combines an animation sampler with a target property being animated.
