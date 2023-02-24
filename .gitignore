@@ -1,0 +1,16 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/tinygltf
+tinygltf.so
+tinygltf.dylib
+tinygltf.dll
+tinygltf.a
+tinygltf.lib
+tinygltf-test-*
+*.exe
+*.o
+*.obj
+*.lst
+*.a

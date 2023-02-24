@@ -1,0 +1,9 @@
+{
+	"authors": [
+		"Syoyo Fujita", "jordan4ibanez"
+	],
+	"copyright": "Copyright © 2023, Syoyo Fujita / jordan4ibanez",
+	"description": "A tiny D gltf model loader for gltf encoded in json.",
+	"license": "MIT",
+	"name": "tinygltf"
+}
