@@ -462,15 +462,6 @@ class AnimationChannel {
     */
     string target_path;
 
-    Value extras;
-    ExtensionMap extensions;
-    ExtensionMap target_extensions;
-
-    /// Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
-    string target_extensions_json_string;
-
     this(int sampler = -1, int target_node = -1) {
         this.sampler = sampler;
         this.target_node = target_node;
@@ -488,12 +479,6 @@ class AnimationSampler {
     /// Interpolation algorithm.
     string interpolation = "LINEAR";  // "LINEAR", "STEP","CUBICSPLINE" or user defined
                                       // string. default "LINEAR"
-    Value extras;
-    ExtensionMap extensions;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
     
     this(int input = -1, int output = -1, string interpolation = "LINEAR"){
         this.input = input;
@@ -518,13 +503,6 @@ class Animation {
         An animation sampler combines timestamps with a sequence of output values and defines an interpolation algorithm.
     */
     AnimationSampler[] samplers;
-
-    Value extras;
-    ExtensionMap extensions;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
     
     this() {}
 }
@@ -541,13 +519,6 @@ class Skin {
     int skeleton = -1;             // The index of the node used as a skeleton root
     /// Indices of skeleton nodes, used as joints in this skin.
     int[] joints;                  // Indices of skeleton nodes
-
-    Value extras;
-    ExtensionMap extensions;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
 
     this() {}
 }
@@ -570,20 +541,12 @@ class Sampler {
 
     /// Optional. -1 = no filter defined. ["NEAREST", "LINEAR"]
     int magFilter = -1;
-
     
     /// ["CLAMP_TO_EDGE", "MIRRORED_REPEAT", "REPEAT"], default "REPEAT"
     int wrapS = TINYGLTF_TEXTURE_WRAP_REPEAT;
 
     /// ["CLAMP_TO_EDGE", "MIRRORED_REPEAT", "REPEAT"], default "REPEAT"
     int wrapT = TINYGLTF_TEXTURE_WRAP_REPEAT;
-
-    Value extras;
-    ExtensionMap extensions;
-
-    /// Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
 
     this(int minFilter = -1, int magFilter = -1, int wrapS = TINYGLTF_TEXTURE_WRAP_REPEAT, int wrapT = TINYGLTF_TEXTURE_WRAP_REPEAT) {
         this.minFilter = minFilter;
@@ -598,13 +561,6 @@ class TextureInfo {
     int texCoord = 0;   // The set index of texture's TEXCOORD attribute used for
                         // texture coordinate mapping.
 
-    Value extras;
-    ExtensionMap extensions;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
-
     this(int index = -1, int texCoord = 0) {
         this.index = index;
         this.texCoord = texCoord;
@@ -617,13 +573,6 @@ class NormalTextureInfo {
                         // texture coordinate mapping.
     double scale = 1.0; // scaledNormal = normalize((<sampled normal texture value>
                         // * 2.0 - 1.0) * vec3(<normal scale>, <normal scale>, 1.0))
-
-    Value extras;
-    ExtensionMap extensions;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
 
     this(int index = -1, int texCoord = 0, double scale = 1.0) {
         this.index = index;
@@ -639,13 +588,6 @@ class OcclusionTextureInfo {
                            // texture coordinate mapping.
     double strength = 1.0; // occludedColor = lerp(color, color * <sampled occlusion
                            // texture value>, <occlusion strength>)
-
-    Value extras;
-    ExtensionMap extensions;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
 
     this(int index = -1, int texCoord = 0, double strength = 1.0){
         this.index = index;
@@ -664,12 +606,6 @@ class BufferView {
                             // understood to be tightly packed
     int target = 0;  // ["ARRAY_BUFFER", "ELEMENT_ARRAY_BUFFER"] for vertex indices
                      // or attribs. Could be 0 for other data
-    Value extras;
-    ExtensionMap extensions;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
 
     bool dracoDecoded = false;  // Flag indicating this has been draco decoded
 
@@ -692,12 +628,6 @@ class Accessor {
     int componentType = -1;  // (required) One of TINYGLTF_COMPONENT_TYPE_***
     size_t count = 0;       // required
     int type = -1;           // (required) One of TINYGLTF_TYPE_***   ..
-    Value extras;
-    ExtensionMap extensions;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
 
     double[] minValues;  // optional. integer value is promoted to double
     double[] maxValues;  // optional. integer value is promoted to double
@@ -767,13 +697,6 @@ class Primitive {
                             // "TANGENT"] pointing
                             // to their corresponding accessors
 
-    ExtensionMap extensions;
-    Value extras;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
-
     this(int material = -1, int indices = -1, int mode = -1) {
         this.material = material;
         this.indices = indices;
@@ -785,13 +708,6 @@ class Mesh {
     string name;
     Primitive[] primitives;
     double[] weights;  // weights to be applied to the Morph Targets
-
-    ExtensionMap extensions;
-    Value extras;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
 
     this() {}
 }
@@ -816,13 +732,6 @@ public:
     double[] translation;  // length must be 0 or 3
     double[] matrix;       // length must be 0 or 16
     double[] weights;  // The weights of the instantiated Morph Target
-
-    ExtensionMap extensions = void;
-    Value extras = void;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
 }
 
 class Buffer {
@@ -831,12 +740,6 @@ class Buffer {
     int byteLength = -1;
     string uri;  // considered as required here but not in the spec (need to clarify)
                  // uri is not decoded(e.g. whitespace may be represented as %20)
-    Value extras;
-    ExtensionMap extensions;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
 
     this() {}
 }
@@ -846,12 +749,6 @@ class Asset {
     string generator;
     string minVersion;
     string copyright;
-    ExtensionMap extensions;
-    Value extras;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
 
     this() {}
 }
@@ -874,13 +771,6 @@ class Model {
     string extensionsRequired;
 
     Asset asset = void;
-
-    Value extras = void;
-    ExtensionMap extensions = void;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
 
     // Takes in a raw string so you can do whatever they want with your file location.
     this(string fileLocation, bool debugInfo = true) {
