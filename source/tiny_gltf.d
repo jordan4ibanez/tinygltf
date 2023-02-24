@@ -1,3 +1,5 @@
+module tinygltf;
+
 import std.stdio;
 import std.string;
 import std.file;
