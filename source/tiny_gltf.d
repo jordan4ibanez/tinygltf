@@ -25,11 +25,14 @@ enum TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT = (5123);
 enum TINYGLTF_COMPONENT_TYPE_INT = (5124);
 enum TINYGLTF_COMPONENT_TYPE_UNSIGNED_INT = (5125);
 enum TINYGLTF_COMPONENT_TYPE_FLOAT = (5126);
-enum TINYGLTF_COMPONENT_TYPE_DOUBLE = 
-  (5130);  // OpenGL double type. Note that some of glTF 2.0 validator does not;
-          // support double type even the schema seems allow any value of
-          // integer:
-          // https://github.com/KhronosGroup/glTF/blob/b9884a2fd45130b4d673dd6c8a706ee21ee5c5f7/specification/2.0/schema/accessor.schema.json#L22
+
+/**
+    OpenGL double type. Note that some of glTF 2.0 validator does not;
+    support double type even the schema seems allow any value of
+    integer:
+    https://github.com/KhronosGroup/glTF/blob/b9884a2fd45130b4d673dd6c8a706ee21ee5c5f7/specification/2.0/schema/accessor.schema.json#L22
+*/
+enum TINYGLTF_COMPONENT_TYPE_DOUBLE = (5130);
 
 enum TINYGLTF_TEXTURE_FILTER_NEAREST = (9728);
 enum TINYGLTF_TEXTURE_FILTER_LINEAR = (9729);
@@ -123,7 +126,7 @@ alias ARRAY_TYPE  = Type.ARRAY_TYPE;
 alias BINARY_TYPE = Type.BINARY_TYPE;
 alias OBJECT_TYPE = Type.OBJECT_TYPE;
 
-
+/// Gets the component size in byte size. (Integer)
 pragma(inline, true) private int getComponentSizeInBytes(uint componentType) {
     if (componentType == TINYGLTF_COMPONENT_TYPE_BYTE) {
         return 1;
@@ -147,6 +150,7 @@ pragma(inline, true) private int getComponentSizeInBytes(uint componentType) {
     }
 }
 
+/// Gets the number of components in a type. (For example vec3 has 3 components.)
 pragma(inline, true) private int getNumComponentsInType(uint ty) {
     if (ty == TINYGLTF_TYPE_SCALAR) {
         return 1;
@@ -168,22 +172,17 @@ pragma(inline, true) private int getNumComponentsInType(uint ty) {
     }
 }
 
-// Simple class to represent JSON object
 //* Translation Note: This whole thing is duck typed
+/// Simple class to represent JSON object
 class Value {
 
 public:
-
-    //* Translation Note: These were typedefs
-    // C++ vector is dynamic array
-    // Value[] array;
-    // C++ map is an Associative Array
-    // Value[string] object;
-
-    // The value becomes whatever it is constructed with
-    // It is a zeitgeist basically
-    // The period of time in this zeitgeist is the life time of it
-    // this. is not required, but I like it
+    /**
+        The value becomes whatever it is constructed with
+        It is a zeitgeist basically
+        The period of time in this zeitgeist is the life time of it
+        this. is not required, but I like it
+    */
     this() {
         this.type_ = NULL_TYPE;
         this.int_value_ = 0;
@@ -263,7 +262,7 @@ public:
         return (this.type_ == OBJECT_TYPE);
     }
 
-    // Use this function if you want to have number value as double.
+    /// Use this function if you want to have number value as double.
     double getNumberAsDouble() {
         if (this.type_ == INT_TYPE) {
             return cast(double)this.int_value_;
@@ -272,8 +271,8 @@ public:
         }
     }
 
-    // Use this function if you want to have number value as int.
     // TODO(syoyo): Support int value larger than 32 bits
+    /// Use this function if you want to have number value as int.
     int getNumberAsInt() {
         if (this.type_ == REAL_TYPE) {
             return cast(int)this.real_value_;
@@ -282,7 +281,7 @@ public:
         }
     }
 
-    // Lookup value from an array
+    /// Lookup value from an array.
     Value get(int idx) {
         static Value null_value;
         assert(this.isArray());
@@ -290,7 +289,7 @@ public:
         return (idx < this.array_value_.length) ? array_value_[idx] : null_value;
     }
 
-    // Lookup value from a key-value pair
+    /// Lookup value from a key-value pair.
     Value get(const string key) {
         static Value null_value;
         assert(this.isArray());
@@ -298,22 +297,23 @@ public:
         return object_value_.get(key, null_value);
     }
 
+    /// Get the length of the array if this is an array.
     size_t arrayLen() {
         if (!this.isArray())
             return 0;
         return this.array_value_.length;
     }
 
-    // Valid only for object type.
+    /// Valid only for object type.
     bool has(const string key) {
         if (!this.isObject())
             return false;
         return (key in this.object_value_) !is null;
     }
 
-    // List keys
+    /// List keys
     string[] keys() {
-        // Clone in memory
+        /// Clone in memory
         string[] tempKeys;
         foreach (k,v; this.object_value_) {
             tempKeys ~= k;
@@ -364,65 +364,75 @@ string TINYGLTF_VALUE_GET(string ctype, string var, string returnType = "") {
 /// Aggregate object for representing a color
 alias ColorValue = double[4];
 
-// === legacy interface ====
 // TODO(syoyo): Deprecate `Parameter` class.
+/// === legacy interface ==== ( will be removed soon )
 class Parameter {
     bool bool_value = false;
     bool has_number_value = false;
     string string_value;
     double[] number_array;
-    // Becomes an associative array
+    /// Becomes an associative array
     int[string] json_double_value;/*:string, double> json_double_value !!*/
     double number_value = 0;
 
     this() {}
+    /**
+        context sensitive methods. depending the type of the Parameter you are
+        accessing, these are either valid or not
+        If this parameter represent a texture map in a material, will return the
+        texture index
 
-    // context sensitive methods. depending the type of the Parameter you are
-    // accessing, these are either valid or not
-    // If this parameter represent a texture map in a material, will return the
-    // texture index
-
-    /// Return the index of a texture if this Parameter is a texture map.
-    /// Returned value is only valid if the parameter represent a texture from a
-    /// material
+        Return the index of a texture if this Parameter is a texture map.
+        Returned value is only valid if the parameter represent a texture from a
+        material
+    */
     int textureIndex() const {
         return json_double_value.get("index", -1);
     }
-
-    /// Return the index of a texture coordinate set if this Parameter is a
-    /// texture map. Returned value is only valid if the parameter represent a
-    /// texture from a material
+    /**
+        Return the index of a texture coordinate set if this Parameter is a
+        texture map. Returned value is only valid if the parameter represent a
+        texture from a material
+    */
     int textureTexCoord() const {
         // As per the spec, if texCoord is omitted, this parameter is 0
         return json_double_value.get("texCoord", 0);
     }
 
-    /// Return the scale of a texture if this Parameter is a normal texture map.
-    /// Returned value is only valid if the parameter represent a normal texture
-    /// from a material
+    /**
+        Return the scale of a texture if this Parameter is a normal texture map.
+        Returned value is only valid if the parameter represent a normal texture
+        from a material
+    */
     double textureScale() const {
         // As per the spec, if scale is omitted, this parameter is 1
         return json_double_value.get("scale", 1);
     }
 
-    /// Return the strength of a texture if this Parameter is a an occlusion map.
-    /// Returned value is only valid if the parameter represent an occlusion map
-    /// from a material
+    /**
+    Return the strength of a texture if this Parameter is a an occlusion map.
+    Returned value is only valid if the parameter represent an occlusion map
+    from a material
+    */
     double textureStrength() const {
         // As per the spec, if strength is omitted, this parameter is 1
         return json_double_value.get("strength", 1);
     }
 
-    /// Material factor, like the roughness or metalness of a material
-    /// Returned value is only valid if the parameter represent a texture from a
-    /// material
+    /**
+        Material factor, like the roughness or metalness of a material
+        Returned value is only valid if the parameter represent a texture from a
+        material
+    */
     double factor() const {
         return number_value;
     }
 
-    /// Return the color of a material
-    /// Returned value is only valid if the parameter represent a texture from a
-    /// material
+    /**
+        Return the color of a material
+        Returned value is only valid if the parameter represent a texture from a
+        material
+    */
     ColorValue colorFactor() {
         //* Translation note: This is an alias now, we can just return double[4]
         return
@@ -433,20 +443,35 @@ class Parameter {
     }
 }
 
+/// Simple alias for readability
 alias ParameterMap = Parameter[string];
+/// Simple alias for readability
 alias ExtensionMap = Value[string];
 
+/**
+    Holds animation channels. Animations channels are the root of the animation in the model.
+    An animation channel combines an animation sampler with a target property being animated.
+*/
 class AnimationChannel {
-    int sampler = -1;      // required
-    int target_node = -1;  // optional index of the node to target (alternative
-                           // target should be provided by extension)
-    string target_path;    // required with standard values of ["translation",
-                           // "rotation", "scale", "weights"]
+    /// Required. Points to the index of the AnimationSampler.
+    int sampler = -1;
+    /**
+        Optional index of the node to target (alternative target should be provided by extension).
+        Extensions are not supported in this translation so this is required.
+        This is the joint if you're wondering.
+    */
+    int target_node = -1;
+
+    /**
+        Required with standard values of ["translation", "rotation", "scale", "weights"]
+    */
+    string target_path;
+
     Value extras;
     ExtensionMap extensions;
     ExtensionMap target_extensions;
 
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    /// Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
     string extras_json_string;
     string extensions_json_string;
     string target_extensions_json_string;
@@ -457,9 +482,15 @@ class AnimationChannel {
     }
 }
 
+/**
+    An animation sampler combines timestamps with a sequence of output values and defines an interpolation algorithm.
+*/
 class AnimationSampler {
+    /// The index of an accessor containing keyframe timestamps.
     int input = -1;                   // required
+    /// The index of an accessor, containing keyframe output values.
     int output = -1;                  // required
+    /// Interpolation algorithm.
     string interpolation = "LINEAR";  // "LINEAR", "STEP","CUBICSPLINE" or user defined
                                       // string. default "LINEAR"
     Value extras;
@@ -476,10 +507,23 @@ class AnimationSampler {
     }
 }
 
+/**
+    A keyframe animation.
+*/
 class Animation {
+    /// The animation name.
     string name;
+    /**
+        An array of animation channels. An animation channel combines an animation sampler with a target property being animated.
+        Different channels of the same animation MUST NOT have the same targets.
+    */
     AnimationChannel[] channels;
+    /**
+        An array of animation samplers.
+        An animation sampler combines timestamps with a sequence of output values and defines an interpolation algorithm.
+    */
     AnimationSampler[] samplers;
+
     Value extras;
     ExtensionMap extensions;
 
@@ -490,10 +534,17 @@ class Animation {
     this() {}
 }
 
+/**
+    Joints and matrices defining a skin.
+*/
 class Skin {
+    /// Name of the skin.
     string name;
+    /// (REQUIRED) The index of the accessor containing the floating-point 4x4 inverse-bind matrices.
     int inverseBindMatrices = -1;  // required here but not in the spec
+    /// The index of the node used as a skeleton root.
     int skeleton = -1;             // The index of the node used as a skeleton root
+    /// Indices of skeleton nodes, used as joints in this skin.
     int[] joints;                  // Indices of skeleton nodes
 
     Value extras;
@@ -506,27 +557,36 @@ class Skin {
     this() {}
 }
 
+/**
+    Texture sampler properties for filtering and wrapping modes.
+*/
 class Sampler {
+    /// The name of this sampler.
     string name;
     // glTF 2.0 spec does not define default value for `minFilter` and
     // `magFilter`. Set -1 in TinyGLTF(issue #186)
 
-    int minFilter = -1;  // optional. -1 = no filter defined. ["NEAREST", "LINEAR",
-                         // "NEAREST_MIPMAP_NEAREST", "LINEAR_MIPMAP_NEAREST",
-                         // "NEAREST_MIPMAP_LINEAR", "LINEAR_MIPMAP_LINEAR"]
+    /**
+        Optional. -1 = no filter defined. ["NEAREST", "LINEAR",
+        "NEAREST_MIPMAP_NEAREST", "LINEAR_MIPMAP_NEAREST",
+        "NEAREST_MIPMAP_LINEAR", "LINEAR_MIPMAP_LINEAR"]
+    */
+    int minFilter = -1;
 
-    int magFilter = -1;  // optional. -1 = no filter defined. ["NEAREST", "LINEAR"]
+    /// Optional. -1 = no filter defined. ["NEAREST", "LINEAR"]
+    int magFilter = -1;
 
-    int wrapS = TINYGLTF_TEXTURE_WRAP_REPEAT;   // ["CLAMP_TO_EDGE", "MIRRORED_REPEAT",
-                                                // "REPEAT"], default "REPEAT"
+    
+    /// ["CLAMP_TO_EDGE", "MIRRORED_REPEAT", "REPEAT"], default "REPEAT"
+    int wrapS = TINYGLTF_TEXTURE_WRAP_REPEAT;
 
-    int wrapT = TINYGLTF_TEXTURE_WRAP_REPEAT;   // ["CLAMP_TO_EDGE", "MIRRORED_REPEAT",
-                                                // "REPEAT"], default "REPEAT"
+    /// ["CLAMP_TO_EDGE", "MIRRORED_REPEAT", "REPEAT"], default "REPEAT"
+    int wrapT = TINYGLTF_TEXTURE_WRAP_REPEAT;
 
     Value extras;
     ExtensionMap extensions;
 
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
+    /// Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
     string extras_json_string;
     string extensions_json_string;
 
