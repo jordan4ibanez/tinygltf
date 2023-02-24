@@ -730,6 +730,7 @@ class Model {
     string extensionsUsed;
     string extensionsRequired;
 
+    //! Being void might throw a null pointer exception, make this some kind of default
     Asset asset = void;
 
     // Takes in a raw string so you can do whatever they want with your file location.
