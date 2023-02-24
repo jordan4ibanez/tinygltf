@@ -598,63 +598,6 @@ class Sampler {
     }
 }
 
-class Image {
-    string name;
-    int width = -1;
-    int height = -1;
-    int component = -1;
-    int bits = -1;        // bit depth per channel. 8(byte), 16 or 32.
-    int pixel_type = -1;  // pixel type(TINYGLTF_COMPONENT_TYPE_***). usually
-                          // UBYTE(bits = 8) or USHORT(bits = 16)
-    ubyte[] image;
-    int bufferView = -1;  // (required if no uri)
-    string mimeType;      // (required if no uri) ["image/jpeg", "image/png",
-                          // "image/bmp", "image/gif"]
-    string uri;           // (required if no mimeType) uri is not decoded(e.g.
-                          // whitespace may be represented as %20)
-    Value extras;
-    ExtensionMap extensions;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
-
-    // When this flag is true, data is stored to `image` in as-is format(e.g. jpeg
-    // compressed for "image/jpeg" mime) This feature is good if you use custom
-    // image loader function. (e.g. delayed decoding of images for faster glTF
-    // parsing) Default parser for Image does not provide as-is loading feature at
-    // the moment. (You can manipulate this by providing your own LoadImageData
-    // function)
-    bool as_is = false;
-
-    this(int bufferView = -1, int width = -1, int height = -1, int component = -1, int bits = -1, int pixel_type = -1) {
-        this.bufferView = bufferView;
-        this.width = width;
-        this.height = height;
-        this.component = component;
-        this.bits = bits;
-        this.pixel_type = pixel_type;
-    }
-}
-
-class Texture {
-    string name;
-
-    int sampler = -1;
-    int source = -1;
-    Value extras;
-    ExtensionMap extensions;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
-
-    this(int sampler = -1, int source = -1) {
-        this.sampler = sampler;
-        this.source = source;
-    }
-}
-
 class TextureInfo {
     int index = -1;     // required.
     int texCoord = 0;   // The set index of texture's TEXCOORD attribute used for
@@ -716,63 +659,6 @@ class OcclusionTextureInfo {
     }
 }
 
-// pbrMetallicRoughness class defined in glTF 2.0 spec.
-class PbrMetallicRoughness {
-    double[4] baseColorFactor = [1.0,1.0,1.0,1.0];  // len = 4. default [1,1,1,1]
-    TextureInfo baseColorTexture;
-    double metallicFactor = 1.0;   // default 1
-    double roughnessFactor = 1.0;  // default 1
-    TextureInfo metallicRoughnessTexture;
-
-    Value extras;
-    ExtensionMap extensions;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
-
-    this(double[4] baseColorFactor = [1.0, 1.0, 1.0, 1.0], double metallicFactor = 1.0, double roughnessFactor = 1.0) {
-        this.baseColorFactor = baseColorFactor;
-        this.metallicFactor = metallicFactor;
-        this.roughnessFactor = roughnessFactor;
-    }
-}
-
-// Each extension should be stored in a ParameterMap.
-// members not in the values could be included in the ParameterMap
-// to keep a single material model
-class Material {
-    string name;
-
-    double[] emissiveFactor = [0.0,0.0,0.0];  // length 3. default [0, 0, 0]
-    string alphaMode = "OPAQUE";              // default "OPAQUE"
-    double alphaCutoff = 0.5;                 // default 0.5
-    bool doubleSided = false;                 // default false;
-
-    PbrMetallicRoughness pbrMetallicRoughness;
-
-    NormalTextureInfo normalTexture;
-    OcclusionTextureInfo occlusionTexture;
-    TextureInfo emissiveTexture;
-
-    // For backward compatibility
-    // TODO(syoyo): Remove `values` and `additionalValues` in the next release.
-    ParameterMap values;
-    ParameterMap additionalValues;
-
-    ExtensionMap extensions;
-    Value extras;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
-
-    this(string alphaMode = "OPAQUE", double alphaCutoff = 0.5, bool doubleSided = false) {
-        this.alphaMode = alphaMode;
-        this.alphaCutoff = alphaCutoff;
-        this.doubleSided = doubleSided;
-    }
-}
 
 class BufferView {
     string name;
@@ -869,65 +755,6 @@ class Accessor {
         this.count = count;
         this.type = type;
     }
-}
-
-class PerspectiveCamera {
-    double aspectRatio = 0.0;  // min > 0
-    double yfov = 0.0;         // required. min > 0
-    double zfar = 0.0;         // min > 0
-    double znear = 0.0;        // required. min > 0
-
-    this(double aspectRatio = 0.0, double yfov = 0.0, double zfar = 0.0, double znear = 0.0) {
-        this.aspectRatio = aspectRatio;
-        this.yfov = yfov;
-        this.zfar = zfar;
-        this.znear = znear;
-    }
-
-    ExtensionMap extensions;
-    Value extras;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
-}
-
-class OrthographicCamera {
-    double xmag = 0.0;   // required. must not be zero.
-    double ymag = 0.0;   // required. must not be zero.
-    double zfar = 0.0;   // required. `zfar` must be greater than `znear`.
-    double znear = 0.0;  // required
-
-    this(double xmag = 0.0, double ymag = 0.0, double zfar = 0.0, double znear = 0.0) {
-        this.xmag = xmag;
-        this.ymag = ymag;
-        this.zfar = zfar;
-        this.znear = znear;
-    }
-
-    ExtensionMap extensions;
-    Value extras;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
-}
-
-class Camera {
-    string type;  // required. "perspective" or "orthographic"
-    string name;
-
-    PerspectiveCamera perspective;
-    OrthographicCamera orthographic;
-
-    ExtensionMap extensions;
-    Value extras;
-
-    this() {}
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
 }
 
 class Primitive {
@@ -1032,58 +859,6 @@ class Asset {
     string extensions_json_string;
 
     this() {}
-}
-
-class Scene {
-    string name;
-    int[] nodes;
-
-    ExtensionMap extensions;
-    Value extras;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
-
-    this() {}
-}
-
-class SpotLight {
-    double innerConeAngle = 0.0;
-    double outerConeAngle = 0.7_853_981_634;
-
-    this(double innerConeAngle = 0.0, double outerConeAngle = 0.7_853_981_634) {
-        this.innerConeAngle = innerConeAngle;
-        this.outerConeAngle = outerConeAngle;
-    }
-
-    ExtensionMap extensions;
-    Value extras;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
-}
-
-class Light {
-    string name;
-    double[] color;
-    double intensity = 1.0;
-    string type;
-    double range = 0.0;  // 0.0 = infinite
-    SpotLight spot;
-
-    this(double intensity = 1.0, double range = 0.0) {
-        this.intensity = intensity;
-        this.range = range;
-    }
-
-    ExtensionMap extensions;
-    Value extras;
-
-    // Filled when SetStoreOriginalJSONForExtrasAndExtensions is enabled.
-    string extras_json_string;
-    string extensions_json_string;
 }
 
 // Model is now the entry point
