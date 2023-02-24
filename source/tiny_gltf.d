@@ -815,7 +815,7 @@ class BufferView {
 
 class Accessor {
     int bufferView = -1;  // optional in spec but required here since sparse accessor
-                    // are not supported
+                          // are not supported
     string name;
     size_t byteOffset = 0;
     bool normalized = false;    // optional.
@@ -831,20 +831,6 @@ class Accessor {
 
     double[] minValues;  // optional. integer value is promoted to double
     double[] maxValues;  // optional. integer value is promoted to double
-
-    struct _Sparse {
-        int count;
-        bool isSparse = false;
-        struct _Indices {
-            int byteOffset;
-            int bufferView;
-            int componentType;  // a TINYGLTF_COMPONENT_TYPE_ value
-        }_Indices indices;
-        struct _Values {
-            int bufferView;
-            int byteOffset;
-            }_Values values;
-    }_Sparse sparse;
 
     ///
     /// Utility function to compute byteStride for a given bufferView object.
@@ -893,7 +879,6 @@ class Accessor {
         this.componentType = componentType;
         this.count = count;
         this.type = type;
-        this.sparse.isSparse = false;
     }
 }
 
