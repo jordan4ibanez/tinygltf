@@ -11,4 +11,11 @@ Keep in mind that you just create a ``Model`` object with a file location, then 
 
 ## Change Log: 
 
+v1.0.1: Became it's own repo instead of a fork.
+
 v1.0.0: It actually runs, woo. Translated from C to D.
+
+
+See the original repo [here.](https://github.com/syoyo/tinygltf)
+
+This was created by syoyo. But I basically gutted it and D-ified it.
