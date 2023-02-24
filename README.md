@@ -11,7 +11,7 @@ Keep in mind that you just create a ``Model`` object with a file location, then 
 
 ## Change Log:
 
-v1.0.2: Fixed it not being a module.
+v1.0.2: Fixed it not being a module. (Thanks Adam!)
 
 v1.0.1: Became it's own repo instead of a fork.
 
