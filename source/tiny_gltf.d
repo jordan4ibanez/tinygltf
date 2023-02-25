@@ -105,7 +105,7 @@ enum TINYGLTF_TARGET_ELEMENT_ARRAY_BUFFER = (34963);
 enum TINYGLTF_SHADER_TYPE_VERTEX_SHADER = (35633);
 enum TINYGLTF_SHADER_TYPE_FRAGMENT_SHADER = (35632);
 
-
+/// Enumerators for Values to define which type they are.
 enum Type {
     NULL_TYPE,
     REAL_TYPE,
@@ -117,13 +117,21 @@ enum Type {
     OBJECT_TYPE
 }
 
+/// Null type enumerator.
 alias NULL_TYPE   = Type.NULL_TYPE;
+/// Double type enumerator.
 alias REAL_TYPE   = Type.REAL_TYPE;
+/// Integer type enumerator.
 alias INT_TYPE    = Type.INT_TYPE;
+/// Boolean type enumerator.
 alias BOOL_TYPE   = Type.BOOL_TYPE;
+/// String type enumerator.
 alias STRING_TYPE = Type.STRING_TYPE;
+/// Array type enumerator.
 alias ARRAY_TYPE  = Type.ARRAY_TYPE;
+/// Binary type enumerator.
 alias BINARY_TYPE = Type.BINARY_TYPE;
+/// Object type enumerator.
 alias OBJECT_TYPE = Type.OBJECT_TYPE;
 
 /// Gets the component size in byte size. (Integer)
@@ -229,35 +237,35 @@ public:
     Type type(){
         return this.type_;
     }
-
+    /// Gets if it's a bool.
     bool isBool() {
         return (this.type_ == BOOL_TYPE);
     }
-
+    /// Gets if it's an integer.
     bool isInt() {
         return (this.type_ == INT_TYPE);
     }
-
+    /// Gets if it's a number.
     bool isNumber() {
         return (this.type_ == REAL_TYPE) || (this.type_ == INT_TYPE);
     }
-
+    /// Gets if it's a double.
     bool isReal() {
         return (this.type_ == REAL_TYPE);
     }
-
+    /// Gets if it's a string.
     bool isString() {
         return (this.type_ == STRING_TYPE);
     }
-
+    /// Gets if it's a binary.
     bool isBinary() {
         return (this.type_ == BINARY_TYPE);
     }
-
+    /// Gets if it's an array.
     bool isArray() {
         return (this.type_ == ARRAY_TYPE);
     }
-
+    /// Gets if it's an object.
     bool isObject() {
         return (this.type_ == OBJECT_TYPE);
     }
