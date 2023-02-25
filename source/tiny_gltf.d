@@ -858,10 +858,6 @@ class Model {
     /// Samplers in the model.
     Sampler[] samplers;
 
-    int defaultScene = -1;
-    string extensionsUsed;
-    string extensionsRequired;
-
     //! Being void might throw a null pointer exception, make this some kind of default
     Asset asset = void;
 
