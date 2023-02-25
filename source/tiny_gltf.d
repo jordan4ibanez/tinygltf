@@ -836,17 +836,26 @@ class Asset {
     this() {}
 }
 
-// Model is now the entry point
-// Model loads all the data automatically through it's methods
+/**
+    Model is the container used to store all the decoded JSON data.
+    It loads all the data automatically through it's methods.
+*/
 class Model {
-
+    /// Accessors in the model.
     Accessor[] accessors;
+    /// Animations in the model.
     Animation[] animations;
+    /// Buffers in the model.
     Buffer[] buffers;
+    /// BufferViews in the model.
     BufferView[] bufferViews;
+    /// Meshes in the model.
     Mesh[] meshes;
+    /// Nodes in the model.
     Node[] nodes;
+    /// Skins in the model.
     Skin[] skins;
+    /// Samplers in the model.
     Sampler[] samplers;
 
     int defaultScene = -1;
