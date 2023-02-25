@@ -817,10 +817,20 @@ class Buffer {
     this() {}
 }
 
+/**
+    Metadata about the glTF asset.
+*/
 class Asset {
-    string version_ = "2.0"; // required
+    /// REQUIRED. The glTF version in the form of <major>.<minor> that this asset targets.
+    string version_ = "2.0";
+    /// Tool that generated this glTF model. Useful for debugging.
     string generator;
+    /**
+        The minimum glTF version in the form of <major>.<minor> that this asset targets.
+        This property MUST NOT be greater than the asset version.
+    */
     string minVersion;
+    /// A copyright message suitable for display to credit the content creator.
     string copyright;
 
     this() {}
