@@ -25,19 +25,19 @@ enum TINYGLTF_MODE_TRIANGLE_STRIP = (5);
 /// OpenGL rendering mode TRIANGLE FAN.
 enum TINYGLTF_MODE_TRIANGLE_FAN = (6);
 
-// GLTF data component type BYTE.
+/// GLTF data component type BYTE.
 enum TINYGLTF_COMPONENT_TYPE_BYTE = (5120);
-// GLTF data component type UNSIGNED BYTE.
+/// GLTF data component type UNSIGNED BYTE.
 enum TINYGLTF_COMPONENT_TYPE_UNSIGNED_BYTE = (5121);
-// GLTF data component type SHORT.
+/// GLTF data component type SHORT.
 enum TINYGLTF_COMPONENT_TYPE_SHORT = (5122);
-// GLTF data component type UNSIGNED SHORT.
+/// GLTF data component type UNSIGNED SHORT.
 enum TINYGLTF_COMPONENT_TYPE_UNSIGNED_SHORT = (5123);
-// GLTF data component type INTEGER.
+/// GLTF data component type INTEGER.
 enum TINYGLTF_COMPONENT_TYPE_INT = (5124);
-// GLTF data component type UNSIGNED INTEGER.
+/// GLTF data component type UNSIGNED INTEGER.
 enum TINYGLTF_COMPONENT_TYPE_UNSIGNED_INT = (5125);
-// GLTF data component type FLOAT.
+/// GLTF data component type FLOAT.
 enum TINYGLTF_COMPONENT_TYPE_FLOAT = (5126);
 /**
     OpenGL double type. Note that some of glTF 2.0 validator does not;
@@ -47,33 +47,40 @@ enum TINYGLTF_COMPONENT_TYPE_FLOAT = (5126);
 */
 enum TINYGLTF_COMPONENT_TYPE_DOUBLE = (5130);
 
-// OpenGL texture filtering mode NEAREST.
+/// OpenGL texture filtering mode NEAREST.
 enum TINYGLTF_TEXTURE_FILTER_NEAREST = (9728);
-// OpenGL texture filtering mode LINEAR.
+/// OpenGL texture filtering mode LINEAR.
 enum TINYGLTF_TEXTURE_FILTER_LINEAR = (9729);
-// OpenGL texture filtering mode NEAREST MIPMAP NEAREST.
+/// OpenGL texture filtering mode NEAREST MIPMAP NEAREST.
 enum TINYGLTF_TEXTURE_FILTER_NEAREST_MIPMAP_NEAREST = (9984);
-// OpenGL texture filtering mode LINEAR MIPMAP NEAREST.
+/// OpenGL texture filtering mode LINEAR MIPMAP NEAREST.
 enum TINYGLTF_TEXTURE_FILTER_LINEAR_MIPMAP_NEAREST = (9985);
-// OpenGL texture filtering mode NEAREST MIPMAP LINEAR.
+/// OpenGL texture filtering mode NEAREST MIPMAP LINEAR.
 enum TINYGLTF_TEXTURE_FILTER_NEAREST_MIPMAP_LINEAR = (9986);
-// OpenGL texture filtering mode LINEAR MIPMAP LINEAR.
+/// OpenGL texture filtering mode LINEAR MIPMAP LINEAR.
 enum TINYGLTF_TEXTURE_FILTER_LINEAR_MIPMAP_LINEAR = (9987);
 
-// OpenGL texture wrap mode REPEAT.
+/// OpenGL texture wrap mode REPEAT.
 enum TINYGLTF_TEXTURE_WRAP_REPEAT = (10497);
-// OpenGL texture wrap mode CLAMP TO EDGE.
+/// OpenGL texture wrap mode CLAMP TO EDGE.
 enum TINYGLTF_TEXTURE_WRAP_CLAMP_TO_EDGE = (33071);
-// OpenGL texture wrap mode MIRRORED REPEAT.
+/// OpenGL texture wrap mode MIRRORED REPEAT.
 enum TINYGLTF_TEXTURE_WRAP_MIRRORED_REPEAT = (33648);
 
 // Redeclarations of the above for technique.parameters.
+/// GLTF data component type BYTE.
 enum TINYGLTF_PARAMETER_TYPE_BYTE = (5120);
+/// GLTF data component type UNSIGNED BYTE.
 enum TINYGLTF_PARAMETER_TYPE_UNSIGNED_BYTE = (5121);
+/// GLTF data component type SHORT.
 enum TINYGLTF_PARAMETER_TYPE_SHORT = (5122);
+/// GLTF data component type UNSIGNED SHORT.
 enum TINYGLTF_PARAMETER_TYPE_UNSIGNED_SHORT = (5123);
+/// GLTF data component type INTEGER.
 enum TINYGLTF_PARAMETER_TYPE_INT = (5124);
+/// GLTF data component type UNSIGNED INTEGER.
 enum TINYGLTF_PARAMETER_TYPE_UNSIGNED_INT = (5125);
+/// GLTF data component type FLOAT.
 enum TINYGLTF_PARAMETER_TYPE_FLOAT = (5126);
 
 enum TINYGLTF_PARAMETER_TYPE_FLOAT_VEC2 = (35664);
