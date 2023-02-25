@@ -83,56 +83,58 @@ enum TINYGLTF_PARAMETER_TYPE_UNSIGNED_INT = (5125);
 /// GLTF data component type FLOAT.
 enum TINYGLTF_PARAMETER_TYPE_FLOAT = (5126);
 
+/// GLTF float Vector 2 parameter type.
 enum TINYGLTF_PARAMETER_TYPE_FLOAT_VEC2 = (35664);
+/// GLTF float Vector 3 parameter type.
 enum TINYGLTF_PARAMETER_TYPE_FLOAT_VEC3 = (35665);
+/// GLTF float Vector 4 parameter type.
 enum TINYGLTF_PARAMETER_TYPE_FLOAT_VEC4 = (35666);
 
+/// GLTF integer Vector 2 parameter type.
 enum TINYGLTF_PARAMETER_TYPE_INT_VEC2 = (35667);
+/// GLTF integer Vector 3 parameter type.
 enum TINYGLTF_PARAMETER_TYPE_INT_VEC3 = (35668);
+/// GLTF integer Vector 4 parameter type.
 enum TINYGLTF_PARAMETER_TYPE_INT_VEC4 = (35669);
 
+/// GLTF Boolean parameter type.
 enum TINYGLTF_PARAMETER_TYPE_BOOL = (35670);
+/// GLTF Boolean Vector 2 parameter type.
 enum TINYGLTF_PARAMETER_TYPE_BOOL_VEC2 = (35671);
+/// GLTF Boolean Vector 3 parameter type.
 enum TINYGLTF_PARAMETER_TYPE_BOOL_VEC3 = (35672);
+/// GLTF Boolean Vector 4 parameter type.
 enum TINYGLTF_PARAMETER_TYPE_BOOL_VEC4 = (35673);
 
+/// GLTF float Matrix 2x2 parameter type.
 enum TINYGLTF_PARAMETER_TYPE_FLOAT_MAT2 = (35674);
+/// GLTF float Matrix 3x3 parameter type.
 enum TINYGLTF_PARAMETER_TYPE_FLOAT_MAT3 = (35675);
+/// GLTF float Matrix 4x4 parameter type.
 enum TINYGLTF_PARAMETER_TYPE_FLOAT_MAT4 = (35676);
-
-enum TINYGLTF_PARAMETER_TYPE_SAMPLER_2D = (35678);
 
 // End parameter types
 
+/// GLTF Vector 2 data type.
 enum TINYGLTF_TYPE_VEC2 = (2);
+/// GLTF Vector 3 data type.
 enum TINYGLTF_TYPE_VEC3 = (3);
+/// GLTF Vector 4 data type.
 enum TINYGLTF_TYPE_VEC4 = (4);
+
+/// GLTF Matrix 2x2 data type.
 enum TINYGLTF_TYPE_MAT2 = (32 + 2);
+/// GLTF Matrix 3x3 data type.
 enum TINYGLTF_TYPE_MAT3 = (32 + 3);
+/// GLTF Matrix 4x4 data type.
 enum TINYGLTF_TYPE_MAT4 = (32 + 4);
+
+/// GLTF Scalar data type.
 enum TINYGLTF_TYPE_SCALAR = (64 + 1);
+/// GLTF Vector data type.
 enum TINYGLTF_TYPE_VECTOR = (64 + 4);
+/// GLTF Matrix data type.
 enum TINYGLTF_TYPE_MATRIX = (64 + 16);
-
-enum TINYGLTF_IMAGE_FORMAT_JPEG = (0);
-enum TINYGLTF_IMAGE_FORMAT_PNG = (1);
-enum TINYGLTF_IMAGE_FORMAT_BMP = (2);
-enum TINYGLTF_IMAGE_FORMAT_GIF = (3);
-
-enum TINYGLTF_TEXTURE_FORMAT_ALPHA = (6406);
-enum TINYGLTF_TEXTURE_FORMAT_RGB = (6407);
-enum TINYGLTF_TEXTURE_FORMAT_RGBA = (6408);
-enum TINYGLTF_TEXTURE_FORMAT_LUMINANCE = (6409);
-enum TINYGLTF_TEXTURE_FORMAT_LUMINANCE_ALPHA = (6410);
-
-enum TINYGLTF_TEXTURE_TARGET_TEXTURE2D = (3553);
-enum TINYGLTF_TEXTURE_TYPE_UNSIGNED_BYTE = (5121);
-
-enum TINYGLTF_TARGET_ARRAY_BUFFER = (34962);
-enum TINYGLTF_TARGET_ELEMENT_ARRAY_BUFFER = (34963);
-
-enum TINYGLTF_SHADER_TYPE_VERTEX_SHADER = (35633);
-enum TINYGLTF_SHADER_TYPE_FRAGMENT_SHADER = (35632);
 
 /// Enumerators for Values to define which type they are.
 enum Type {
@@ -146,21 +148,21 @@ enum Type {
     OBJECT_TYPE
 }
 
-/// Null type enumerator.
+/// Null type enumerator. D type nothing/null.
 alias NULL_TYPE   = Type.NULL_TYPE;
-/// Double type enumerator.
+/// Double type enumerator. D type double.
 alias REAL_TYPE   = Type.REAL_TYPE;
-/// Integer type enumerator.
+/// Integer type enumerator. D type int.
 alias INT_TYPE    = Type.INT_TYPE;
-/// Boolean type enumerator.
+/// Boolean type enumerator. D type bool.
 alias BOOL_TYPE   = Type.BOOL_TYPE;
-/// String type enumerator.
+/// String type enumerator. D type string.
 alias STRING_TYPE = Type.STRING_TYPE;
-/// Array type enumerator.
+/// Array type enumerator. D type Value[].
 alias ARRAY_TYPE  = Type.ARRAY_TYPE;
-/// Binary type enumerator.
+/// Binary type enumerator. D type ubyte[].
 alias BINARY_TYPE = Type.BINARY_TYPE;
-/// Object type enumerator.
+/// Object type enumerator. D type Value[string].
 alias OBJECT_TYPE = Type.OBJECT_TYPE;
 
 /// Gets the component size in byte size. (Integer)
@@ -210,7 +212,7 @@ pragma(inline, true) private int getNumComponentsInType(uint ty) {
 }
 
 //* Translation Note: This whole thing is duck typed
-/// Simple class to represent JSON object
+/// Simple class to represent a JSON object.
 class Value {
 
 public:
