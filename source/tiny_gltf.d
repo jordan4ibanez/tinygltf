@@ -756,12 +756,6 @@ class Mesh {
 class Node {
 
 public:
-    this(int camera = -1, int skin = -1, int mesh = -1) {
-        this.camera = camera;
-        this.skin = skin;
-        this.mesh = mesh;
-    }
-
     int camera = -1;  // the index of the camera referenced by this node
 
     string name;
@@ -773,6 +767,12 @@ public:
     double[] translation;  // length must be 0 or 3
     double[] matrix;       // length must be 0 or 16
     double[] weights;  // The weights of the instantiated Morph Target
+    
+    this(int camera = -1, int skin = -1, int mesh = -1) {
+        this.camera = camera;
+        this.skin = skin;
+        this.mesh = mesh;
+    }
 }
 
 class Buffer {
