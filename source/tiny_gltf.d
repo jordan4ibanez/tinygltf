@@ -859,13 +859,14 @@ class Model {
     Sampler[] samplers;
 
     //! Being void might throw a null pointer exception, make this some kind of default
-    Asset asset = void;
+    Asset asset;
 
     // Takes in a raw string so you can do whatever they want with your file location.
     this(string fileLocation, bool debugInfo = true) {
         //* Model can work with it's internal fields so we don't have to chain them
         this.debugInfo = debugInfo;
         this.fileLocation = fileLocation;
+        this.asset = new Asset();
 
         writeln("\nMODEL " ~ fileLocation ~ " INITIALIZED\n");
     }
