@@ -11,7 +11,9 @@ Keep in mind that you just create a ``Model`` object with a file location, then 
 
 ## Change Log:
 
-v1.0.3: Removed bloat, updated DDOC.
+v1.0.4: Removed bloat, overhauled DDOC.
+
+v1.0.3: Tested something in DDOC on dub.
 
 v1.0.2: Fixed it not being a module. (Thanks Adam!)
 
