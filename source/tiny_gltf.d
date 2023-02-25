@@ -438,12 +438,12 @@ class Animation {
 class Skin {
     /// Name of the skin.
     string name;
-    /// (REQUIRED) The index of the accessor containing the floating-point 4x4 inverse-bind matrices.
-    int inverseBindMatrices = -1;  // required here but not in the spec
+    /// REQUIRED. The index of the accessor containing the floating-point 4x4 inverse-bind matrices.
+    int inverseBindMatrices = -1;
     /// The index of the node used as a skeleton root.
-    int skeleton = -1;             // The index of the node used as a skeleton root
+    int skeleton = -1;
     /// Indices of skeleton nodes, used as joints in this skin.
-    int[] joints;                  // Indices of skeleton nodes
+    int[] joints;
 
     this() {}
 }
