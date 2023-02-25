@@ -185,55 +185,52 @@ pragma(inline, true) private int getNumComponentsInType(uint ty) {
 class Value {
 
 public:
-    /**
-        The value becomes whatever it is constructed with
-        It is a zeitgeist basically
-        The period of time in this zeitgeist is the life time of it
-        this. is not required, but I like it
-    */
+    // The value becomes whatever it is constructed with
+
+    /// Construct as a NULL type
     this() {
         this.type_ = NULL_TYPE;
         this.int_value_ = 0;
         this.real_value_ = 0.0;
         this.boolean_value_ = false;
     }
-    
+    /// Construct as a BOOL (boolean) type.
     this(bool b) {
         this.boolean_value_ = b;
         this.type_ = BOOL_TYPE;
     }
-
+    /// Construct as a INT (integer) type.
     this(int i) {
         this.int_value_ = i;
         this.real_value_ = i;
         this.type_ = INT_TYPE;
     }
-
+    /// Construct as a REAL (double) type.
     this(double n) {
         this.real_value_ = n;
         this.type_ = REAL_TYPE;
     }
-
+    /// Construct as a STRING (string) type.
     this(string s) {
         this.string_value_ = s;
         this.type_ = STRING_TYPE;
     }
-
+    /// Construct as a BINARY (ubyte[]) type.
     this(ubyte[] v) {
         this.binary_value_ = v;
         this.type_ = BINARY_TYPE;
     }
-    
+    /// Construct as an ARRAY (Value[]) type.
     this(Value[] a) {
         this.array_value_ = a;
         this.type_ = ARRAY_TYPE;
     }
-
+    /// Construct as an OBJECT (Value[string]) type.
     this(Value[string] o) {
         this.object_value_ = o;
         this.type_ = OBJECT_TYPE;
     }
-
+    /// Get what Type this Value is.
     Type type(){
         return this.type_;
     }
