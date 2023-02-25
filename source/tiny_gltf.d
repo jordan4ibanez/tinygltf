@@ -373,14 +373,14 @@ class AnimationChannel {
     /// Required. Points to the index of the AnimationSampler.
     int sampler = -1;
     /**
-        Optional index of the node to target (alternative target should be provided by extension).
+        REQUIRED. The index of the node to target (alternative target should be provided by extension).
         Extensions are not supported in this translation so this is required.
         This is the joint if you're wondering.
     */
     int target_node = -1;
 
     /**
-        Required with standard values of ["translation", "rotation", "scale", "weights"]
+        REQUIRED with standard values of ["translation", "rotation", "scale", "weights"]
     */
     string target_path;
 
@@ -525,7 +525,7 @@ class BufferView {
 class Accessor {
     /**
         The index of the bufferView.
-        Optional in spec but required here since sparse accessor are not supported.
+        REQUIRED here since sparse accessor are not supported.
     */
     int bufferView = -1;
     /// The name of the Accessor.
@@ -547,7 +547,7 @@ class Accessor {
     /**
         REQUIRED. The number of elements referenced by this accessor.
     */
-    int count = 0;       // required
+    int count = 0;
     /**
         Specifies if the accessor’s elements are scalars, vectors, or matrices.
         REQUIRED. One of TINYGLTF_TYPE_***
