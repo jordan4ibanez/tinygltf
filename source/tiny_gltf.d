@@ -10,12 +10,19 @@ import std.conv;
 import std.algorithm.iteration;
 import std.base64;
 
+/// OpenGL rendering mode POINTS.
 enum TINYGLTF_MODE_POINTS = (0);
+/// OpenGL rendering mode LINE.
 enum TINYGLTF_MODE_LINE = (1);
+/// OpenGL rendering mode LINE LOOP.
 enum TINYGLTF_MODE_LINE_LOOP = (2);
+/// OpenGL rendering mode LINE STRIP.
 enum TINYGLTF_MODE_LINE_STRIP = (3);
+/// OpenGL rendering mode TRIANGLES.
 enum TINYGLTF_MODE_TRIANGLES = (4);
+/// OpenGL rendering mode TRIANGLE STRIP.
 enum TINYGLTF_MODE_TRIANGLE_STRIP = (5);
+/// OpenGL rendering mode TRIANGLE FAN.
 enum TINYGLTF_MODE_TRIANGLE_FAN = (6);
 
 enum TINYGLTF_COMPONENT_TYPE_BYTE = (5120);
