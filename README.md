@@ -11,6 +11,8 @@ Keep in mind that you just create a ``Model`` object with a file location, then 
 
 ## Change Log:
 
+v1.0.10: Typed in the wrong word.
+
 v1.0.9: Last attempt to make DUB work with this thing.
 
 v1.0.8: Let's try it again.
