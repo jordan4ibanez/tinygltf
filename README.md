@@ -11,6 +11,8 @@ Keep in mind that you just create a ``Model`` object with a file location, then 
 
 ## Change Log:
 
+v1.0.7: Literally just modify one thing.
+
 v1.0.6: File name now matches the module.
 
 v1.0.5: Documented everything into DDOC.
