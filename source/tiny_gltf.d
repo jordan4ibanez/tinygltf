@@ -556,18 +556,37 @@ class Sampler {
     }
 }
 
-
+/**
+    A view into a buffer generally representing a subset of the buffer.
+*/
 class BufferView {
+    /// The name of the bufferView.
     string name;
-    int buffer = -1;        // Required
-    size_t byteOffset = 0;  // minimum 0, default 0
-    size_t byteLength = 0;  // required, minimum 1. 0 = invalid
-    size_t byteStride = 0;  // minimum 4, maximum 252 (multiple of 4), default 0 =
-                            // understood to be tightly packed
-    int target = 0;  // ["ARRAY_BUFFER", "ELEMENT_ARRAY_BUFFER"] for vertex indices
-                     // or attribs. Could be 0 for other data
+    /// REQUIRED. The index of the buffer.
+    int buffer = -1;
+    /**
+        The offset into the buffer in bytes.
+        Minimum 0, default 0.
+    */
+    size_t byteOffset = 0;
+    /**
+        The length of the bufferView in bytes.
+        REQUIRED. Minimum 1. 0 is invalid.
+    */
+    size_t byteLength = 0;
+    /**
+        The stride, in bytes.
+        Minimum 4. Maximum 252 (multiple of 4). Default 0 is understood to be tightly packed.
+    */
+    size_t byteStride = 0;
+    /**
+        The hint representing the intended GPU buffer type to use with this buffer view.
+        ["ARRAY_BUFFER", "ELEMENT_ARRAY_BUFFER"] for vertex indices or attribs. Could be 0 for other data.
+    */
+    int target = 0;
 
-    bool dracoDecoded = false;  // Flag indicating this has been draco decoded
+    /// Flag indicating this has been draco decoded
+    bool dracoDecoded = false;
 
     this(int buffer = -1, int byteOffset = 0, int byteLength = 0, int byteStride = 0, int target = 0, bool dracoDecoded = false) {
         this.buffer = buffer;
