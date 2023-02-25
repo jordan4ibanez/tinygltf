@@ -693,20 +693,32 @@ class Accessor {
     }
 }
 
+/**
+    Geometry to be rendered with the given material.
+*/
 class Primitive {
-    int[string] attributes; // (required) A dictionary object of
-                            // integer, where each integer
-                            // is the index of the accessor
-                            // containing an attribute.
-    int material = -1;  // The index of the material to apply to this primitive
-                        // when rendering.
-    int indices = -1;   // The index of the accessor that contains the indices.
-    int mode = -1;      // one of TINYGLTF_MODE_***
+    /**
+        REQUIRED. A plain JSON object, where each key corresponds to a mesh attribute semantic and each
+        value is the index of the accessor containing attribute’s data.
+    */
+    int[string] attributes;
 
-    int[string][] targets;  // array of morph targets,
-                            // where each target is a dict with attributes in ["POSITION, "NORMAL",
-                            // "TANGENT"] pointing
-                            // to their corresponding accessors
+    /// The index of the material to apply to this primitive when rendering.
+    int material = -1;
+    /// The index of the accessor that contains the vertex indices.
+    int indices = -1;
+    /**
+        The topology type of primitives to render.
+        One of TINYGLTF_MODE_***
+    */
+    int mode = -1;
+
+    /**
+        An array of morph targets. Each target is an associative array with attributes in
+        ["POSITION, "NORMAL", "TANGENT"] pointing to their corresponding accessors.
+    */
+    int[string][] targets;
+                            
 
     this(int material = -1, int indices = -1, int mode = -1) {
         this.material = material;
