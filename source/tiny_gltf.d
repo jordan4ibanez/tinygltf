@@ -348,14 +348,13 @@ protected:
     
 }
 
-//* Translation note: This is a C mixin generator!
-string TINYGLTF_VALUE_GET(string ctype, string var, string returnType = "") {
+// Generate mixins so I don't have to type a bunch of things.
+private string TINYGLTF_VALUE_GET(string ctype, string var, string returnType = "") {
     if (returnType == "") {
         returnType = ctype;
     }
     const string fancyCType = capitalize(ctype);
-    return
-    "\n" ~
+    return "\n" ~
     returnType ~ " Get" ~ fancyCType ~ "() {\n" ~
          "return this." ~ var ~ ";\n" ~
     "}";
