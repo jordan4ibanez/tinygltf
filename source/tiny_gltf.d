@@ -394,13 +394,16 @@ class AnimationChannel {
     An animation sampler combines timestamps with a sequence of output values and defines an interpolation algorithm.
 */
 class AnimationSampler {
-    /// The index of an accessor containing keyframe timestamps.
-    int input = -1;                   // required
-    /// The index of an accessor, containing keyframe output values.
-    int output = -1;                  // required
-    /// Interpolation algorithm.
-    string interpolation = "LINEAR";  // "LINEAR", "STEP","CUBICSPLINE" or user defined
-                                      // string. default "LINEAR"
+    /// REQUIRED. The index of an accessor containing keyframe timestamps.
+    int input = -1;
+    /// REQUIRED. The index of an accessor, containing keyframe output values.
+    int output = -1;
+    /**
+        Interpolation algorithm.
+        "LINEAR", "STEP","CUBICSPLINE" or user defined string.
+        Default: "LINEAR".
+    */
+    string interpolation = "LINEAR";
     
     this(int input = -1, int output = -1, string interpolation = "LINEAR"){
         this.input = input;
