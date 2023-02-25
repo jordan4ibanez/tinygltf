@@ -598,23 +598,55 @@ class BufferView {
     }
 }
 
+/**
+    A typed view into a buffer view that contains raw binary data.
+*/
 class Accessor {
-    int bufferView = -1;  // optional in spec but required here since sparse accessor
-                          // are not supported
+    /**
+        The index of the bufferView.
+        Optional in spec but required here since sparse accessor are not supported.
+    */
+    int bufferView = -1;
+    /// The name of the Accessor.
     string name;
+    /** 
+        The offset relative to the start of the buffer view in bytes.
+    */
     size_t byteOffset = 0;
-    bool normalized = false;    // optional.
-    int componentType = -1;  // (required) One of TINYGLTF_COMPONENT_TYPE_***
-    size_t count = 0;       // required
-    int type = -1;           // (required) One of TINYGLTF_TYPE_***   ..
+    /**
+        Specifies whether integer data values are normalized before usage.
+        OPTIONAL.
+    */
+    bool normalized = false;
+    /**
+        The datatype of the accessor’s components.
+        REQUIRED. One of TINYGLTF_COMPONENT_TYPE_***
+    */
+    int componentType = -1;
+    /**
+        REQUIRED. The number of elements referenced by this accessor.
+    */
+    int count = 0;       // required
+    /**
+        Specifies if the accessor’s elements are scalars, vectors, or matrices.
+        REQUIRED. One of TINYGLTF_TYPE_***
+    */
+    int type = -1;
+    /**
+        Minimum value of each component in this accessor.
+        OPTIONAL. Integer value is promoted to double.
+    */
+    double[] minValues;
+    /**
+        Maximum value of each component in this accessor.
+        OPTIONAL. Integer value is promoted to double.
+    */
+    double[] maxValues;
 
-    double[] minValues;  // optional. integer value is promoted to double
-    double[] maxValues;  // optional. integer value is promoted to double
-
-    ///
-    /// Utility function to compute byteStride for a given bufferView object.
-    /// Returns -1 upon invalid glTF value or parameter configuration.
-    ///
+    /**
+        Utility function to compute byteStride for a given bufferView object.
+        Returns -1 upon invalid glTF value or parameter configuration.
+    */
     int byteStride(const BufferView bufferViewObject) const {
         if (bufferViewObject.byteStride == 0) {
             // Assume data is tightly packed.
