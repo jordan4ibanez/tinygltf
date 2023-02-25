@@ -870,7 +870,10 @@ class Model {
         writeln("\nMODEL " ~ fileLocation ~ " INITIALIZED\n");
     }
     
-    // Returns loading success.
+    /**
+        Automatically loads, decodes, and stores all the implemented JSON data into the model's arrays.
+        Returns loading success.
+    */
     bool loadFile(){
         if (!this.fileExists()) {
             writeDebug(
