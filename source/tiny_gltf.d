@@ -727,10 +727,20 @@ class Primitive {
     }
 }
 
+/**
+    A set of primitives to be rendered.
+    Its global transform is defined by a node that references it.
+*/
 class Mesh {
+    /// The name of the mesh.
     string name;
+    /// An array of primitives, each defining geometry to be rendered.
     Primitive[] primitives;
-    double[] weights;  // weights to be applied to the Morph Targets
+    /**
+        Array of weights to be applied to the morph targets.
+        The number of array elements MUST match the number of morph targets.
+    */
+    double[] weights;
 
     this() {}
 }
