@@ -162,7 +162,7 @@ alias STRING_TYPE = Type.STRING_TYPE;
 alias ARRAY_TYPE  = Type.ARRAY_TYPE;
 /// Binary type enumerator. D type ubyte[].
 alias BINARY_TYPE = Type.BINARY_TYPE;
-/// Object type enumerator. D type Value[[string]].
+/// Object type enumerator. D type Value[[value][value]].
 alias OBJECT_TYPE = Type.OBJECT_TYPE;
 
 /// Gets the component size in byte size. (Integer)
