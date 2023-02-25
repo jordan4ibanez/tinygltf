@@ -756,18 +756,43 @@ class Mesh {
 class Node {
 
 public:
-    int camera = -1;  // the index of the camera referenced by this node
-
+    /// The index of the camera referenced by this node.
+    int camera = -1;
+    /// The name of this node.
     string name;
+    /// The index of the skin referenced by this node.
     int skin = -1;
+    /// The index of the mesh in this node.
     int mesh = -1;
+    /// The indices of this node’s children.
     int[] children;
-    double[] rotation;     // length must be 0 or 4
-    double[] scale;        // length must be 0 or 3
-    double[] translation;  // length must be 0 or 3
-    double[] matrix;       // length must be 0 or 16
-    double[] weights;  // The weights of the instantiated Morph Target
-    
+    /**
+        The node’s unit quaternion rotation in the order (x, y, z, w), where w is the scalar.
+        Length must be 0 or 4.
+    */
+    double[] rotation;
+    /**
+        The node’s non-uniform scale, given as the scaling factors along the x, y, and z axes.
+        Length must be 0 or 3.
+    */
+    double[] scale;
+    /**
+        The node’s translation along the x, y, and z axes.
+        Length must be 0 or 3.
+    */
+    double[] translation;
+    /**
+        A floating-point 4x4 transformation matrix stored in column-major order.
+        Length must be 0 or 16.
+    */
+    double[] matrix;
+    /**
+        The weights of the instantiated morph target.
+        The number of array elements MUST match the number of morph targets of the referenced mesh.
+        When defined, mesh MUST also be defined.
+    */
+    double[] weights;
+
     this(int camera = -1, int skin = -1, int mesh = -1) {
         this.camera = camera;
         this.skin = skin;
