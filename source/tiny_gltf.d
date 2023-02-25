@@ -510,16 +510,12 @@ class BufferView {
     */
     int target = 0;
 
-    /// Flag indicating this has been draco decoded
-    bool dracoDecoded = false;
-
-    this(int buffer = -1, int byteOffset = 0, int byteLength = 0, int byteStride = 0, int target = 0, bool dracoDecoded = false) {
+    this(int buffer = -1, int byteOffset = 0, int byteLength = 0, int byteStride = 0, int target = 0) {
         this.buffer = buffer;
         this.byteOffset = byteOffset;
         this.byteLength = byteLength;
         this.byteStride = byteStride;
         this.target = target;
-        this.dracoDecoded = dracoDecoded;
     }
 }
 
