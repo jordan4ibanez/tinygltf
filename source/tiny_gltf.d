@@ -458,13 +458,13 @@ class Sampler {
     // `magFilter`. Set -1 in TinyGLTF(issue #186)
 
     /**
-        Optional. -1 = no filter defined. ["NEAREST", "LINEAR",
+        OPTIONAL. -1 is no filter defined. ["NEAREST", "LINEAR",
         "NEAREST_MIPMAP_NEAREST", "LINEAR_MIPMAP_NEAREST",
         "NEAREST_MIPMAP_LINEAR", "LINEAR_MIPMAP_LINEAR"]
     */
     int minFilter = -1;
 
-    /// Optional. -1 = no filter defined. ["NEAREST", "LINEAR"]
+    /// OPTIONAL. -1 is no filter defined. ["NEAREST", "LINEAR"]
     int magFilter = -1;
     
     /// ["CLAMP_TO_EDGE", "MIRRORED_REPEAT", "REPEAT"], default "REPEAT"
