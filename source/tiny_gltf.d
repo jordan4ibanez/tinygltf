@@ -813,11 +813,6 @@ class Buffer {
     ubyte[] data;
     /// The length of the buffer in bytes.
     int byteLength = -1;
-    /**
-        Considered as required here but not in the spec.
-        uri is not decoded(e.g. whitespace may be represented as %20)
-    */
-    string uri;
 
     this() {}
 }
