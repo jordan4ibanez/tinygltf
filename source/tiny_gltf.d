@@ -360,9 +360,6 @@ private string TINYGLTF_VALUE_GET(string ctype, string var, string returnType = 
     "}";
 }
 
-/// Aggregate object for representing a color
-alias ColorValue = double[4];
-
 /**
     Holds animation channels. Animations channels are the root of the animation in the model.
     An animation channel combines an animation sampler with a target property being animated.
