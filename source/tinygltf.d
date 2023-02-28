@@ -870,7 +870,7 @@ private:
         foreach (key,value; this.jsonData.objectNoRef) {
 
             //! Don't remove this until everything is accounted for
-            writeln(key);
+            // writeln(key);
 
             //TODO: surround this with try catch, return false on failure along with debug info on which one failed
 
@@ -912,8 +912,39 @@ private:
 
     void grabSkinsData(JSONValue jsonObject) {
         
-        writeln(jsonObject);
+        //* This is explicit to help code-d and to be more readable for control flow
+        //* Key is integer(size_t), value is JSON value
+        foreach (size_t key, JSONValue value; jsonObject.array) {
 
+            // We are assembling this skin
+            Skin skinObject = new Skin();
+
+            // Now parse the string
+
+            //* Key is string, value is JSON value
+            foreach (string arrayKey, JSONValue arrayValue; value.object) {
+                writeln(arrayKey);
+                switch (arrayKey) {
+                    // String
+                    case "name": {
+                        assert(arrayValue.type == JSONType.string);
+                        skinObject.name = arrayValue.str;
+                        break;
+                    }
+                    // Integer[]
+                    case "joints": {
+                        
+                        break;
+                    }
+                    // Mat4[]
+                    case "inverseBindMatrices": {
+
+                        break;
+                    }
+                    default: // Unknown
+                }
+            }
+        }
     }
 
     
