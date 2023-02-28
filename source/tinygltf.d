@@ -905,7 +905,33 @@ private:
                     this.grabSkinsData(value);
                     break;
                 }
+                case "animations": {
+                    this.grabAnimationsData(value);
+                    break;
+                } 
                 default: // Unknown
+            }
+        }
+    }
+    
+    // Yes, this actually has to be iterated like this
+    void grabAnimationsData(JSONValue jsonObject) {
+
+        //* Implementation Note: We are accessing into each animation, like "run", "jump", etc in blender.
+        //* This is why each pass creates a new animation object in the array.
+
+        //* This is explicit to help code-d and to be more readable for control flow
+        //* Key is integer(size_t), value is JSON value
+        foreach (size_t key, JSONValue value; jsonObject.array) {
+
+            // We are assembling this animation
+            Animation animationObject = new Animation();
+
+            // Now parse the string
+            
+            //* Key is string, value is JSON value
+            foreach (string arrayKey, JSONValue arrayValue; value.object) {
+
             }
         }
     }
@@ -958,8 +984,6 @@ private:
             this.skins ~= skinObject;
         }
     }
-
-    
 
     void grabNodesData(JSONValue jsonObject) {
 
