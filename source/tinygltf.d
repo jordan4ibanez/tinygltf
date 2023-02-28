@@ -870,7 +870,7 @@ private:
         foreach (key,value; this.jsonData.objectNoRef) {
 
             //! Don't remove this until everything is accounted for
-            // writeln(key);
+            writeln(key);
 
             //TODO: surround this with try catch, return false on failure along with debug info on which one failed
 
@@ -1440,5 +1440,11 @@ unittest {
     assert(corruptedModel.loadFile() == false);
 
     writeln("\nCORRUPTED PASS\n");
+
+    // Now bring Minetest Sam onboard.
+    Model sam = new Model("models/sam/sam.gltf");
+    assert(sam.loadFile() == true);
+
+    writeln("\nSAM PASSED :)\n");
     
 }
