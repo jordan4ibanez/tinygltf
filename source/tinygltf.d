@@ -940,9 +940,9 @@ private:
                         }
                         break;
                     }
-                    // Mat4[] - Mat4 of type Double
+                    // Integer - Points to Accessor
                     case "inverseBindMatrices": {
-
+                        writeln(arrayValue);
                         break;
                     }
                     default: // Unknown
