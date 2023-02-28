@@ -954,6 +954,8 @@ private:
                     default: // Unknown
                 }
             }
+
+            this.skins ~= skinObject;
         }
     }
 
