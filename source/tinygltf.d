@@ -952,6 +952,8 @@ private:
                     default: // Unknown
                 }
             }
+
+            this.animations ~= animationObject;
         }
     }
 
