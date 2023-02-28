@@ -939,7 +939,8 @@ private:
                     }
                     // AnimationChannel[]
                     case "channels": {
-
+                        assert(arrayValue.type == JSONType.array);
+                        this.grabAnimationChannels(animationObject, arrayValue);
                         break;
                     }
                     // String
@@ -950,6 +951,62 @@ private:
                     }
                     default: // Unknown
                 }
+            }
+        }
+    }
+
+    void grabAnimationChannels(Animation animationObject, JSONValue jsonObject) {
+
+        //* This is explicit to help code-d and to be more readable for control flow
+        //* Key is integer(size_t), value is JSON value
+        foreach (size_t key, JSONValue value; jsonObject.array) {
+            
+            // We are assembling this animation channel
+            AnimationChannel animationChannelObject = new AnimationChannel();
+
+            // Now parse the string
+
+            //* Key is string, value is JSON value
+            foreach (string arrayKey, JSONValue arrayValue; value.object) {
+                switch (arrayKey) {
+                    // Integer
+                    case "sampler": {
+                        assert(arrayValue.type == JSONType.integer);
+                        animationChannelObject.sampler = cast(int)arrayValue.integer;
+                        break;
+                    }
+                    // JSON Value
+                    case "target": {
+                        assert(arrayValue.type == JSONType.object);
+                        this.grabAnimationChannelTarget(animationChannelObject, arrayValue);
+                        break;
+                    }
+                    default:
+                }
+            }
+
+            animationObject.channels ~= animationChannelObject;
+        }
+    }
+
+    void grabAnimationChannelTarget(AnimationChannel animationChannelObject, JSONValue jsonObject) {
+        //* This is explicit to help code-d and to be more readable for control flow
+        //* Key is string, value is JSON value
+        foreach (string key, JSONValue value; jsonObject.object) {
+            switch (key) {
+                // Integer
+                case "node": {
+                    assert(value.type == JSONType.integer);
+                    animationChannelObject.target_node = cast(int)value.integer;
+                    break;
+                }
+                // String
+                case "path": {
+                    assert(value.type == JSONType.string);
+                    animationChannelObject.target_path = value.str;
+                    break;
+                }
+                default: // Unknown
             }
         }
     }
