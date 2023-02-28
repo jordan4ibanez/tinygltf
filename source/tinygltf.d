@@ -901,9 +901,17 @@ private:
                     this.grabAssetData(value);
                     break;
                 }
+                case "skins": {
+                    this.grabSkinsData(value);
+                    break;
+                }
                 default: // Unknown
             }
         }
+    }
+
+    void grabSkinsData(JSONValue jsonObject) {
+
     }
 
     void grabAssetData(JSONValue jsonObject) {
