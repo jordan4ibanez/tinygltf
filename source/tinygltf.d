@@ -914,7 +914,6 @@ private:
         }
     }
     
-    // Yes, this actually has to be iterated like this
     void grabAnimationsData(JSONValue jsonObject) {
 
         //* Implementation Note: We are accessing into each animation, like "run", "jump", etc in blender.
@@ -931,17 +930,19 @@ private:
             
             //* Key is string, value is JSON value
             foreach (string arrayKey, JSONValue arrayValue; value.object) {
-                writeln(arrayKey);
-
                 switch (arrayKey) {
+                    // AnimationSampler[]
                     case "samplers": {
-
+                        assert(arrayValue.type == JSONType.array);
+                        this.grabAnimationSamplers(animationObject, arrayValue);
                         break;
                     }
+                    // AnimationChannel[]
                     case "channels": {
 
                         break;
                     }
+                    // String
                     case "name": {
                         assert(arrayValue.type == JSONType.string);
                         animationObject.name = arrayValue.str;
@@ -950,6 +951,46 @@ private:
                     default: // Unknown
                 }
             }
+        }
+    }
+
+    void grabAnimationSamplers(Animation animationObject, JSONValue jsonObject) {
+
+        //* This is explicit to help code-d and to be more readable for control flow
+        //* Key is integer(size_t), value is JSON value
+        foreach (size_t key, JSONValue value; jsonObject.array) {
+
+            // We are assembling this animation sampler
+            AnimationSampler animationSamplerObject = new AnimationSampler();
+
+            // Now parse the string
+
+            //* Key is string, value is JSON value
+            foreach (string arrayKey, JSONValue arrayValue; value.object) {
+                switch (arrayKey) {
+                    // Integer
+                    case "input": {
+                        assert(arrayValue.type == JSONType.integer);
+                        animationSamplerObject.input = cast(int)arrayValue.integer;
+                        break;
+                    }
+                    // String
+                    case "interpolation": {
+                        assert(arrayValue.type == JSONType.string);
+                        animationSamplerObject.interpolation = arrayValue.str;
+                        break;                        
+                    }
+                    // Integer
+                    case "output": {
+                        assert(arrayValue.type == JSONType.integer);
+                        animationSamplerObject.output = cast(int)arrayValue.integer;
+                        break;
+                    }
+                    default: // Unknown
+                }
+            }
+
+            animationObject.samplers ~= animationSamplerObject;
         }
     }
 
