@@ -933,7 +933,11 @@ private:
                     }
                     // Integer[]
                     case "joints": {
-                        
+                        assert(arrayValue.type == JSONType.array);
+                        foreach(size_t k, JSONValue v; arrayValue.array){
+                            assert(v.type == JSONType.integer);
+                            skinObject.joints ~= cast(int)v.integer;
+                        }
                         break;
                     }
                     // Mat4[] - Mat4 of type Double
