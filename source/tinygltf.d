@@ -923,7 +923,6 @@ private:
 
             //* Key is string, value is JSON value
             foreach (string arrayKey, JSONValue arrayValue; value.object) {
-                writeln(arrayKey);
                 switch (arrayKey) {
                     // String
                     case "name": {
@@ -942,7 +941,14 @@ private:
                     }
                     // Integer - Points to Accessor
                     case "inverseBindMatrices": {
-                        writeln(arrayValue);
+                        assert(arrayValue.type == JSONType.integer);
+                        skinObject.inverseBindMatrices = cast(int)arrayValue.integer;
+                        break;
+                    }
+                    // Integer - Points to root node (root joint)
+                    case "skeleton": {
+                        assert(arrayValue.type == JSONType.integer);
+                        skinObject.skeleton = cast(int)arrayValue.integer;
                         break;
                     }
                     default: // Unknown
