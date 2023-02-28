@@ -931,7 +931,24 @@ private:
             
             //* Key is string, value is JSON value
             foreach (string arrayKey, JSONValue arrayValue; value.object) {
+                writeln(arrayKey);
 
+                switch (arrayKey) {
+                    case "samplers": {
+
+                        break;
+                    }
+                    case "channels": {
+
+                        break;
+                    }
+                    case "name": {
+                        assert(arrayValue.type == JSONType.string);
+                        animationObject.name = arrayValue.str;
+                        break;
+                    }
+                    default: // Unknown
+                }
             }
         }
     }
