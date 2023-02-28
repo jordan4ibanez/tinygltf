@@ -936,7 +936,7 @@ private:
                         
                         break;
                     }
-                    // Mat4[]
+                    // Mat4[] - Mat4 of type Double
                     case "inverseBindMatrices": {
 
                         break;
